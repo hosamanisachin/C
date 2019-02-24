@@ -1,0 +1,80 @@
+Print an array from outwards to inwards.
+
+
+
+
+#include<stdio.h>
+void fun(int rr, int cc, int arr[rr][cc]);
+#define r 3
+#define c 3
+
+int main()
+{
+	int arr[r][c] = {{1,2,3},
+						{4,5,6},
+						{7,8,9}};
+	fun(3,3,arr);
+	return 0;
+}
+
+void fun(int rr,int cc, int arr[rr][cc])
+{
+	int k=0,l=0,i,cnt=0,total=rr*cc;
+	while(k<rr && l<cc) //till all rows and cols are read
+
+	{
+			if(cnt==total)
+				break;
+
+			for(i=k;i<rr;i++) //i=0;i<3;i++ k=0;l=0
+			{
+				printf("(%d)--",arr[i][l]); //(0,0)-(1,0)-(2,0) row down
+				cnt++; 
+			}
+			l++;  //l=1
+			
+			if(cnt==total)
+				break;
+
+			for(i=l;i<cc;i++) //i=0;i<3,i++  rr=3
+			{
+				printf("(%d)--",arr[rr-1][i]); //(2,1)-(2,2)
+				cnt++;
+			}
+			rr--; //r=2
+			if(cnt==total)
+				break;
+
+			if(k<rr)
+			{
+				for(i=rr-1;i>=k;i--) //i=2-1;i>=0;i--  cc=3
+				{
+					printf("(%d)--",arr[i][cc-1]); //(1,2)-(0,2)
+					cnt++;
+				}
+				cc--; //cc=2
+			}
+			if(cnt==total)
+				break;
+
+			if(l<cc) //1<2
+			{
+				for(i=cc-1;i>=l;--i) // i=2-1;i>=1;--i  k=0
+				{
+					printf("(%d)--",arr[k][i]); //(0,1)
+					cnt++;
+
+				}
+				k++; // k=1
+			}
+		}
+}
+
+
+OUTPUT
+[1] [2] [3] 
+[4] [5] [6] 
+[7] [8] [9]
+
+
+(1)--(4)--(7)--(8)--(9)--(6)--(3)--(2)--(5)
